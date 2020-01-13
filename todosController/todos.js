@@ -9,7 +9,6 @@ let Todo = require('../models/Todo');
 class TodosController {
 
   async getAllTodos(req, res) {
-    console.log('All todos');
     
     try {
       const todos = await Todo.find();
@@ -85,6 +84,8 @@ class TodosController {
   }
 
   async deleteTodo(req, res){
+    console.log('Delete Todo!');
+    
     const {id} = req.params;
     if(!ObjectId.isValid(id) && !id.match(/^[a-fA-F0-9]{24}$/)){
       return res.status(404).send({
