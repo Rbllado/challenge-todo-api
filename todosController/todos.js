@@ -9,16 +9,20 @@ let Todo = require('../models/Todo');
 class TodosController {
 
   async getAllTodos(req, res) {
+    console.log('All todos');
+    
     try {
       const todos = await Todo.find();
       res.json(todos);
     } catch (error) {
       console.log(error);
     }
+    
   }
 
   async getTodo(req, res){
     const {id} = req.params;
+    
     if(!ObjectId.isValid(id) && !id.match(/^[a-fA-F0-9]{24}$/)){
       return res.status(404).send({
         success: 'false',
@@ -35,6 +39,8 @@ class TodosController {
 
   async createTodo(req, res) {
     let newTodo = new Todo(req.body);
+    console.log("NEw todo", req.body);
+    
     if (!req.body.title) {
       return res.status(400).send({
         success: 'false',
